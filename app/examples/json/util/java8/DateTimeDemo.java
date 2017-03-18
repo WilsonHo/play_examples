@@ -1,9 +1,12 @@
 package examples.json.util.java8;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 /**
  * Created by wilson on 3/2/17.
@@ -30,6 +33,7 @@ public class DateTimeDemo {
 //        System.out.println(now.plus(1, ChronoUnit.YEARS));
 //        System.out.println(now.plus(1, ChronoUnit.CENTURIES));
 //        System.out.println(now.plus(1, ChronoUnit.DECADES));
+//        System.out.println(now.plus(1, ChronoUnit.DECADES));
 //        System.out.println(now.plus(1, ChronoUnit.ERAS));
 //        System.out.println(now.plus(1, ChronoUnit.FOREVER));
 
@@ -40,6 +44,7 @@ public class DateTimeDemo {
         System.out.println(now.isAfter(yesterday));
 
         LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("--------------------------------------");
         System.out.println(localDateTime);
         System.out.println(localDateTime.atZone(ZoneId.of("America/New_York")));
 
@@ -56,12 +61,13 @@ public class DateTimeDemo {
 
         LocalDateTime parsedLocalDateTime = LocalDateTime.parse("2014-01-01T11:00");
         System.out.println(parsedLocalDateTime);
+        System.out.println("------------1--------------");
         System.out.println(LocalDateTime.now(ZoneId.of("UTC")));
 
         System.out.println(LocalDateTime.ofInstant(now, ZoneId.of("UTC")));
 
         ZonedDateTime zonedDateTime = ZonedDateTime.now();
-        System.out.println(zonedDateTime);
+        System.out.println( );
 
         System.out.println(zonedDateTime.until(ZonedDateTime.parse("2017-03-02T15:29:27.460+07:00"), ChronoUnit.HOURS));
 
@@ -74,5 +80,12 @@ public class DateTimeDemo {
         System.out.println(zonedDateTime.withZoneSameInstant(ZoneId.of("America/Chicago")));
         System.out.println(zonedDateTime.withZoneSameLocal(ZoneId.of("America/Chicago")));
 
+
+        LocalDateTime ldt = LocalDateTime.ofInstant(now, ZoneOffset.UTC);
+
+        DateFormat FORMAT_YYYYMMDD = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateKey = Date.from(ldt.atZone(ZoneOffset.UTC).toInstant());
+
+        System.out.println("LocalDateTime ---> Date ::::: " + FORMAT_YYYYMMDD.format(dateKey));
     }
 }
